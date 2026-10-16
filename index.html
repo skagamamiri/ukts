@@ -102,6 +102,7 @@
   .bintang{width:54px;height:54px;margin:0 auto 10px;display:block}
   .slip-atas h2{margin:0;font-size:1.9rem;font-weight:700;letter-spacing:-.01em}
   .contoh{display:inline-block;margin-bottom:10px;padding:4px 12px;border-radius:999px;background:#fff;color:var(--hijau);font-size:.8rem;font-weight:600}
+  .contoh-kecil{margin-bottom:6px;background:var(--hijau-muda)}
   .slip-atas p{margin:6px auto 0;max-width:32ch;font-weight:300;opacity:.92}
   .tebuk{ /* garis tebuk tiket */
     position:relative;height:0;border-top:2px dashed var(--garis);margin:0 18px;
@@ -231,8 +232,11 @@ const ralat = $('#ralat-ic');
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let icSemasa = '';
 
-// ---- Data contoh untuk menguji paparan "layak" (padam selepas ujian) ----
+// ---- Data contoh untuk menguji paparan (padam selepas ujian) ----
+// 999999999999 = layak, 888888888888 = tidak layak
 const IC_CONTOH = '999999999999';
+const IC_CONTOH_TIDAK = '888888888888';
+const DATA_CONTOH_TIDAK = { status: 'tidak_layak', contoh: true, nama: 'MUHAMMAD ADAM HAKIMI BIN ROSLAN' };
 const DATA_CONTOH = {
   status: 'layak', contoh: true,
   nama: 'NUR AISYAH HUMAIRA BINTI AHMAD FAIZAL',
@@ -293,6 +297,7 @@ $('#borang').addEventListener('submit', async e => {
   }
   icSemasa = ic;
   if (ic === IC_CONTOH) { tunjuk(DATA_CONTOH); return; }
+  if (ic === IC_CONTOH_TIDAK) { tunjuk(DATA_CONTOH_TIDAK); return; }
   sibuk(true);
   hasil.innerHTML = '<section class="panel masuk"><div class="muat"><span class="pusing" aria-hidden="true"></span>Menyemak rekod calon…</div></section>';
   try {
@@ -327,7 +332,7 @@ function tunjuk(d) {
   if (d.status === 'ic_salah') return papar('amaran', IKON.silang, 'No. MyKid tidak sah', 'Pastikan nombor yang dimasukkan mengandungi 12 digit seperti pada MyKid anak.');
   if (d.status === 'tiada') return papar('amaran', IKON.silang, 'Nombor ini tiada dalam senarai calon',
     'Kami tidak menemui calon Ujian Pemilihan Tahun 1 2027 dengan No. MyKid <b>' + esc(fmtIC(icSemasa)) + '</b>. Semak semula nombor tersebut dan cuba lagi.');
-  if (d.status === 'tidak_layak') return papar('tidak', IKON.hati, esc(d.nama),
+  if (d.status === 'tidak_layak') return papar('tidak', IKON.hati, (d.contoh ? '<span class="contoh contoh-kecil">Paparan contoh</span><br>' : '') + esc(d.nama),
     'Terima kasih kerana menyertai Ujian Pemilihan Tahun 1 SABK. Calon tidak tersenarai dalam tawaran kemasukan ke SK Agama (MIS) Miri bagi sesi 2027. Semoga anak tuan/puan terus cemerlang di sekolah pilihan.');
   if (d.status !== 'layak') return papar('amaran', IKON.silang, 'Semakan tidak dapat diselesaikan', esc(d.mesej || 'Cuba sekali lagi sebentar nanti.'));
 
