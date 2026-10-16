@@ -2,71 +2,221 @@
 <html lang="ms">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Semakan Tahun 1 2027 — SK Agama (MIS) Miri</title>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Semakan Tahun 1 2027 · SK Agama (MIS) Miri</title>
+<meta name="description" content="Semakan kelayakan masuk Tahun 1 Sesi Persekolahan 2027, SK Agama (MIS) Miri. Masukkan No. MyKid calon untuk melihat keputusan dan muat turun surat tawaran.">
+<meta name="theme-color" content="#0d4a40">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --hijau:#0f6b4a; --hijau2:#13875d; --emas:#c9a227; --bg:#f3f7f4; --kad:#fff;
-    --teks:#1c2b24; --kabur:#5f6f67; --garis:#dde7e1; --merah:#b3261e; --merahbg:#fdecea;
+    --hijau:#0d4a40;        /* hijau tua sekolah */
+    --hijau-2:#14675a;
+    --hijau-muda:#e3efe9;
+    --emas:#c99a2e;         /* emas songket */
+    --emas-muda:#fbf3df;
+    --kertas:#f4f7f5;
+    --putih:#ffffff;
+    --teks:#15302a;
+    --kabur:#5a6e68;
+    --garis:#d5e1db;
+    --merah:#9b2c22;
+    --merah-muda:#fbeceb;
+    --r-besar:22px;
+    --r-kecil:12px;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--teks)}
-  header{background:linear-gradient(135deg,var(--hijau),var(--hijau2));color:#fff;padding:28px 16px 64px;text-align:center;position:relative}
-  header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:6px;background:var(--emas)}
-  header small{display:block;letter-spacing:.14em;font-size:.72rem;opacity:.85;font-weight:600}
-  header h1{margin:8px 0 4px;font-size:clamp(1.25rem,4.5vw,1.8rem);font-weight:800;line-height:1.25}
-  header p{margin:0;opacity:.9;font-size:.92rem}
-  main{max-width:560px;margin:-40px auto 40px;padding:0 16px}
-  .kad{background:var(--kad);border-radius:16px;box-shadow:0 6px 24px rgba(15,107,74,.10);padding:22px;margin-bottom:16px}
-  label{font-weight:700;font-size:.9rem;display:block;margin-bottom:8px}
-  .baris{display:flex;gap:8px}
-  input{flex:1;min-width:0;font:inherit;font-size:1.15rem;letter-spacing:.06em;padding:13px 14px;border:2px solid var(--garis);border-radius:12px;outline:none}
-  input:focus{border-color:var(--hijau2)}
-  button{font:inherit;font-weight:700;border:0;border-radius:12px;padding:13px 18px;cursor:pointer;background:var(--hijau);color:#fff}
-  button:disabled{opacity:.6;cursor:wait}
-  .nota{font-size:.8rem;color:var(--kabur);margin-top:10px}
-  .tahniah{text-align:center}
-  .tahniah .ikon{font-size:2.6rem}
-  .tahniah h2{margin:6px 0;color:var(--hijau);font-size:1.4rem}
-  dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:16px 0 0;font-size:.92rem}
-  dt{color:var(--kabur)} dd{margin:0;font-weight:600;word-break:break-word}
-  h3{font-size:1rem;margin:0 0 12px}
-  .dok{display:flex;align-items:center;gap:12px;padding:12px;border:1px solid var(--garis);border-radius:12px;margin-bottom:10px;text-decoration:none;color:inherit;background:#fff;width:100%;text-align:left}
-  .dok:hover{border-color:var(--hijau2);background:#f7fbf9}
-  .dok .i{width:40px;height:40px;border-radius:10px;background:#e7f3ed;display:grid;place-items:center;font-size:1.2rem;flex:none}
-  .dok b{display:block;font-size:.93rem} .dok span{font-size:.78rem;color:var(--kabur)}
-  .dok.utama{border:2px solid var(--emas);background:#fffaf0}
-  .amaran{background:#fff7e0;border-left:4px solid var(--emas);padding:12px;border-radius:8px;font-size:.88rem;margin-top:14px}
-  .gagal{background:var(--merahbg);color:var(--merah);border-radius:12px;padding:14px;font-size:.92rem}
-  .neutral{background:#eef2f0;border-radius:12px;padding:14px;font-size:.92rem}
-  footer{text-align:center;color:var(--kabur);font-size:.75rem;padding:0 16px 30px}
-  .tersembunyi{display:none}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;min-height:100vh;
+    font-family:'Lexend',system-ui,-apple-system,'Segoe UI',sans-serif;
+    font-weight:400;line-height:1.55;color:var(--teks);background:var(--kertas);
+  }
+
+  /* ---------- Kepala: corak bintang lapan ---------- */
+  .kepala{
+    position:relative;color:#fff;text-align:center;
+    background-color:var(--hijau);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.09' stroke-width='1.2'%3E%3Crect x='17' y='17' width='30' height='30'/%3E%3Crect x='17' y='17' width='30' height='30' transform='rotate(45 32 32)'/%3E%3Ccircle cx='32' cy='32' r='6'/%3E%3Cpath d='M0 0l17 17M64 0L47 17M0 64l17-17M64 64L47 47'/%3E%3C/g%3E%3C/svg%3E");
+    padding:calc(24px + env(safe-area-inset-top)) 20px 96px;
+  }
+  .kepala::after{ /* jalur emas */
+    content:"";position:absolute;left:0;right:0;bottom:0;height:5px;
+    background:repeating-linear-gradient(90deg,var(--emas) 0 18px,#e2bf63 18px 22px);
+  }
+  .logo{display:block;width:88px;height:auto;margin:0 auto 12px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
+  .sekolah{font-size:.95rem;font-weight:500;opacity:.92}
+  .kepala h1{
+    margin:14px auto 10px;
+    font-size:clamp(1.85rem,6.4vw,2.9rem);line-height:1.08;font-weight:700;letter-spacing:-.02em;
+  }
+  .kepala p{margin:0 auto;max-width:34ch;font-weight:300;opacity:.88;font-size:1rem}
+
+  main{max-width:540px;margin:-64px auto 0;padding:0 16px 48px;position:relative}
+
+  .panel{background:var(--putih);border-radius:var(--r-besar);padding:26px 22px;box-shadow:0 1px 0 var(--garis),0 18px 40px -24px rgba(13,74,64,.45)}
+  #hasil > *{margin-top:16px}
+
+  /* ---------- Borang ---------- */
+  label{display:block;font-weight:600;font-size:1.02rem;margin-bottom:4px}
+  .bantu{color:var(--kabur);font-size:.88rem;margin:0 0 14px}
+  .medan{
+    width:100%;font:inherit;font-weight:500;font-size:1.45rem;letter-spacing:.08em;
+    font-variant-numeric:tabular-nums;text-align:center;
+    padding:14px 12px;border:2px solid var(--garis);border-radius:var(--r-kecil);
+    background:var(--kertas);color:var(--teks);outline:none;transition:border-color .15s,background .15s;
+  }
+  .medan::placeholder{color:#a9b8b2;letter-spacing:.08em}
+  .medan:focus{border-color:var(--hijau-2);background:#fff}
+  .medan[aria-invalid="true"]{border-color:var(--merah);background:var(--merah-muda)}
+  .butang{
+    display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin-top:12px;
+    font:inherit;font-weight:600;font-size:1.05rem;color:#fff;background:var(--hijau);
+    border:0;border-radius:var(--r-kecil);padding:15px 18px;cursor:pointer;transition:background .15s,transform .1s;
+  }
+  .butang:hover{background:var(--hijau-2)}
+  .butang:active{transform:translateY(1px)}
+  .butang:disabled{opacity:.7;cursor:progress}
+  .butang.kedua{background:transparent;color:var(--hijau);border:2px solid var(--garis)}
+  .butang.kedua:hover{border-color:var(--hijau-2);background:var(--hijau-muda)}
+  :focus-visible{outline:3px solid var(--emas);outline-offset:3px}
+  .medan:focus-visible{outline:none}
+  .pusing{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:pusing .8s linear infinite}
+  @keyframes pusing{to{transform:rotate(360deg)}}
+
+  .ralat{color:var(--merah);font-size:.9rem;margin:8px 0 0}
+  .ralat:empty{display:none}
+
+  /* ---------- Slip tawaran (elemen utama) ---------- */
+  .slip{
+    position:relative;background:var(--putih);border-radius:var(--r-besar);overflow:hidden;
+    box-shadow:0 1px 0 var(--garis),0 24px 48px -26px rgba(13,74,64,.55);
+  }
+  .slip-atas{
+    background:var(--hijau);color:#fff;padding:26px 22px 30px;text-align:center;
+    background-image:radial-gradient(circle at 50% -40%,rgba(201,154,46,.55),transparent 62%);
+  }
+  .bintang{width:54px;height:54px;margin:0 auto 10px;display:block}
+  .slip-atas h2{margin:0;font-size:1.9rem;font-weight:700;letter-spacing:-.01em}
+  .slip-atas p{margin:6px auto 0;max-width:32ch;font-weight:300;opacity:.92}
+  .tebuk{ /* garis tebuk tiket */
+    position:relative;height:0;border-top:2px dashed var(--garis);margin:0 18px;
+  }
+  .tebuk::before,.tebuk::after{content:"";position:absolute;top:-13px;width:24px;height:24px;border-radius:50%;background:var(--kertas)}
+  .tebuk::before{left:-31px}.tebuk::after{right:-31px}
+  .slip-badan{padding:22px}
+  .nama{font-size:1.25rem;font-weight:600;line-height:1.3;margin:0 0 14px;text-align:center;text-wrap:balance}
+  .butiran{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:10px;margin:0}
+  .butiran div{background:var(--kertas);border-radius:var(--r-kecil);padding:10px 12px}
+  .butiran div.penuh{grid-column:1/-1}
+  .butiran dt{font-size:.78rem;color:var(--kabur)}
+  .butiran dd{margin:2px 0 0;font-weight:600;font-variant-numeric:tabular-nums;word-break:break-word}
+  .butiran dd.ic,.butiran dd.gil{white-space:nowrap;word-break:normal;font-size:.95rem}
+  .tarikh-akhir{
+    display:flex;gap:12px;align-items:flex-start;margin-top:16px;padding:14px;
+    background:var(--emas-muda);border-radius:var(--r-kecil);font-size:.93rem;
+  }
+  .tarikh-akhir svg{flex:none;margin-top:2px}
+
+  /* ---------- Langkah seterusnya ---------- */
+  .panel h3{margin:0 0 4px;font-size:1.15rem;font-weight:600}
+  .panel .sub{margin:0 0 18px;color:var(--kabur);font-size:.92rem}
+  ol.langkah{list-style:none;margin:0;padding:0;counter-reset:l}
+  ol.langkah li{counter-increment:l;position:relative;padding-left:46px;margin-bottom:14px}
+  ol.langkah li:last-child{margin-bottom:0}
+  ol.langkah li::before{
+    content:counter(l);position:absolute;left:0;top:2px;width:32px;height:32px;border-radius:50%;
+    display:grid;place-items:center;font-weight:600;font-size:.95rem;
+    background:var(--hijau-muda);color:var(--hijau);
+  }
+  ol.langkah li::after{content:"";position:absolute;left:15px;top:38px;bottom:-12px;width:2px;background:var(--garis)}
+  ol.langkah li:last-child::after{display:none}
+  .langkah-tajuk{font-weight:600;display:block;padding-top:5px}
+  .langkah-teks{display:block;color:var(--kabur);font-size:.9rem;margin-top:2px}
+
+  .dok{
+    display:flex;align-items:center;gap:12px;width:100%;margin-top:10px;padding:12px 14px;
+    font:inherit;text-align:left;color:inherit;text-decoration:none;cursor:pointer;
+    background:#fff;border:1.5px solid var(--garis);border-radius:var(--r-kecil);transition:border-color .15s,background .15s;
+  }
+  .dok:hover{border-color:var(--hijau-2);background:#f8fbf9}
+  .dok:disabled{cursor:progress;opacity:.75}
+  .dok .ikon{width:40px;height:40px;flex:none;border-radius:10px;display:grid;place-items:center;background:var(--hijau-muda);color:var(--hijau)}
+  .dok.utama{border-color:var(--emas);background:var(--emas-muda)}
+  .dok.utama .ikon{background:var(--emas);color:#fff}
+  .dok .t{flex:1;min-width:0}
+  .dok b{display:block;font-weight:600;font-size:.97rem}
+  .dok small{display:block;color:var(--kabur);font-size:.8rem;margin-top:1px}
+  .dok .anak{flex:none;color:var(--kabur)}
+  .dok.menunggu{cursor:default;border-style:dashed}
+
+  /* ---------- Keadaan lain ---------- */
+  .mesej{display:flex;gap:14px;align-items:flex-start}
+  .mesej .ikon{width:44px;height:44px;flex:none;border-radius:50%;display:grid;place-items:center}
+  .mesej h2{margin:0 0 4px;font-size:1.15rem;font-weight:600;line-height:1.3}
+  .mesej p{margin:0;color:var(--kabur);font-size:.95rem}
+  .mesej.neutral .ikon{background:var(--hijau-muda);color:var(--hijau)}
+  .mesej.amaran .ikon{background:var(--merah-muda);color:var(--merah)}
+  .mesej.tidak .ikon{background:var(--emas-muda);color:#8a6512}
+
+  .muat{display:flex;align-items:center;gap:12px;color:var(--kabur)}
+  .muat .pusing{border-color:var(--garis);border-top-color:var(--hijau)}
+
+  .info{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:20px;font-size:.82rem;text-align:center;color:var(--kabur)}
+  .info div{padding:10px 6px;border-radius:var(--r-kecil);background:var(--putih);border:1px solid var(--garis)}
+  .info strong{display:block;color:var(--teks);font-weight:600;font-size:.9rem}
+
+  footer{text-align:center;color:var(--kabur);font-size:.8rem;padding:8px 16px calc(28px + env(safe-area-inset-bottom))}
+
+  .masuk{animation:masuk .45s cubic-bezier(.2,.8,.2,1) both}
+  @keyframes masuk{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+  @media (min-width:600px){
+    .kepala{padding-top:44px;padding-bottom:110px}
+    .panel{padding:30px 30px}
+    .slip-badan{padding:26px 30px}
+  }
+  @media print{
+    .kepala,.borang-panel,footer,.info,.lagi{display:none!important}
+    body{background:#fff} main{margin:0}
+  }
 </style>
 </head>
 <body>
-<header>
-  <small>SEKOLAH KEBANGSAAN AGAMA (MIS) MIRI</small>
-  <h1>Semakan Kelayakan Masuk Tahun 1<br>Sesi Persekolahan 2027</h1>
-  <p>Ujian Pemilihan Tahun Satu SABK Negeri Sarawak</p>
+
+<header class="kepala">
+  <img class="logo" src="logo.png" width="88" height="101" alt="Lencana Sekolah Kebangsaan Agama (MIS) Miri">
+  <div class="sekolah">Sekolah Kebangsaan Agama (MIS) Miri</div>
+  <h1>Semakan Kemasukan<br>Tahun 1 2027</h1>
+  <p>Keputusan Ujian Pemilihan Tahun Satu SABK Negeri Sarawak</p>
 </header>
 
 <main>
-  <div class="kad">
-    <form id="borang" autocomplete="off">
-      <label for="ic">No. Kad Pengenalan / MyKid Calon</label>
-      <div class="baris">
-        <input id="ic" inputmode="numeric" placeholder="cth: 200412130554" maxlength="14" required>
-        <button id="btn" type="submit">Semak</button>
-      </div>
-      <div class="nota">Masukkan 12 digit tanpa sengkang (-).</div>
+  <section class="panel borang-panel" aria-labelledby="lbl-ic">
+    <form id="borang" autocomplete="off" novalidate>
+      <label id="lbl-ic" for="ic">No. MyKid calon</label>
+      <p class="bantu" id="bantu-ic">Nombor 12 digit pada MyKid atau sijil kelahiran anak.</p>
+      <input id="ic" class="medan" inputmode="numeric" autocomplete="off"
+             placeholder="200412-13-0554" maxlength="14" aria-describedby="bantu-ic ralat-ic" required>
+      <p class="ralat" id="ralat-ic" role="alert"></p>
+      <button id="btn" class="butang" type="submit">Semak keputusan</button>
     </form>
-  </div>
+  </section>
 
-  <div id="hasil"></div>
+  <div id="hasil" aria-live="polite"></div>
+
+  <div class="info" id="info">
+    <div><strong>120</strong>tempat ditawarkan</div>
+    <div><strong>60 + 60</strong>lelaki &amp; perempuan</div>
+    <div><strong>Tahun 1</strong>sesi 2027</div>
+  </div>
 </main>
 
-<footer>© 2026 SK Agama (MIS) Miri · Unit ICT</footer>
+<footer>SK Agama (MIS) Miri · Unit ICT<br>Pertanyaan: sila hubungi pejabat sekolah pada waktu pejabat.</footer>
 
 <script>
 // >>> Tampal URL Web App Apps Script di sini (berakhir dengan /exec)
@@ -74,10 +224,30 @@ const API = 'https://script.google.com/macros/s/AKfycbxX4g4o-OaT4uld48tfXjt4ZHLy
 
 const $ = s => document.querySelector(s);
 const hasil = $('#hasil');
+const medan = $('#ic');
+const btn = $('#btn');
+const ralat = $('#ralat-ic');
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let icSemasa = '';
 
-$('#ic').addEventListener('input', e => { e.target.value = e.target.value.replace(/\D/g, '').slice(0, 12); });
+const IKON = {
+  dok: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>',
+  surat: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>',
+  turun: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11m0 0-4-4m4 4 4-4M5 19h14"/></svg>',
+  luar: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>',
+  jam: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8a6512" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  info: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>',
+  silang: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5h.01"/></svg>',
+  hati: '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>',
+  bintang: '<svg class="bintang" viewBox="0 0 60 60" aria-hidden="true"><g fill="#c99a2e"><rect x="14" y="14" width="32" height="32" rx="3"/><rect x="14" y="14" width="32" height="32" rx="3" transform="rotate(45 30 30)"/></g><path d="m21 30 6 6 12-13" fill="none" stroke="#0d4a40" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+// Format paparan 200412-13-0554 (yang dihantar tetap 12 digit)
+medan.addEventListener('input', () => {
+  const d = medan.value.replace(/\D/g, '').slice(0, 12);
+  medan.value = d.length > 8 ? `${d.slice(0,6)}-${d.slice(6,8)}-${d.slice(8)}` : d.length > 6 ? `${d.slice(0,6)}-${d.slice(6)}` : d;
+  if (medan.getAttribute('aria-invalid')) { medan.removeAttribute('aria-invalid'); ralat.textContent = ''; }
+});
 
 async function panggil(params, cubaan = 2) {
   const url = API + '?' + new URLSearchParams(params).toString();
@@ -93,63 +263,118 @@ async function panggil(params, cubaan = 2) {
   }
 }
 
+function sibuk(ya) {
+  btn.disabled = ya;
+  btn.innerHTML = ya ? '<span class="pusing" aria-hidden="true"></span> Sedang menyemak' : 'Semak keputusan';
+}
+
 $('#borang').addEventListener('submit', async e => {
   e.preventDefault();
-  const ic = $('#ic').value.replace(/\D/g, '');
-  if (ic.length !== 12) { papar('<div class="gagal">No. kad pengenalan mesti 12 digit.</div>'); return; }
+  const ic = medan.value.replace(/\D/g, '');
+  if (ic.length !== 12) {
+    medan.setAttribute('aria-invalid', 'true');
+    ralat.textContent = 'No. MyKid mesti 12 digit. Anda telah masukkan ' + ic.length + ' digit.';
+    medan.focus();
+    return;
+  }
   icSemasa = ic;
-  $('#btn').disabled = true; $('#btn').textContent = 'Menyemak…';
-  papar('<div class="neutral">Sedang menyemak, sila tunggu…</div>');
+  sibuk(true);
+  hasil.innerHTML = '<section class="panel masuk"><div class="muat"><span class="pusing" aria-hidden="true"></span>Menyemak rekod calon…</div></section>';
   try {
-    const d = await panggil({ ic });
-    tunjuk(d);
+    tunjuk(await panggil({ ic }));
   } catch (err) {
-    papar('<div class="gagal">Sistem sibuk atau tiada sambungan internet. Sila cuba sebentar lagi.</div>');
+    papar('amaran', IKON.silang, 'Tiada sambungan ke sistem',
+      'Semakan tidak berjaya kerana sambungan internet terputus atau sistem sedang sibuk. Cuba sekali lagi dalam beberapa minit.');
   } finally {
-    $('#btn').disabled = false; $('#btn').textContent = 'Semak';
+    sibuk(false);
   }
 });
 
-function papar(html) { hasil.innerHTML = '<div class="kad">' + html + '</div>'; }
+function papar(jenis, ikon, tajuk, teks, lagi = true) {
+  hasil.innerHTML =
+    `<section class="panel masuk"><div class="mesej ${jenis}"><div class="ikon">${ikon}</div>` +
+    `<div><h2>${tajuk}</h2><p>${teks}</p></div></div>` +
+    (lagi ? '<button class="butang kedua lagi" type="button" data-semula>Semak nombor lain</button>' : '') +
+    '</section>';
+  ikatSemula();
+  hasil.querySelector('h2').setAttribute('tabindex', '-1');
+}
+
+function ikatSemula() {
+  hasil.querySelectorAll('[data-semula]').forEach(b => b.addEventListener('click', () => {
+    hasil.innerHTML = ''; medan.value = ''; medan.focus();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }));
+}
 
 function tunjuk(d) {
-  if (d.status === 'tutup') return papar('<div class="neutral">' + esc(d.mesej || 'Semakan belum dibuka.') + '</div>');
-  if (d.status === 'ic_salah') return papar('<div class="gagal">No. kad pengenalan tidak sah.</div>');
-  if (d.status === 'tiada') return papar('<div class="gagal">Maaf, no. kad pengenalan ini tiada dalam senarai calon Ujian Pemilihan Tahun 1 2027. Sila semak semula nombor yang dimasukkan.</div>');
-  if (d.status === 'tidak_layak') return papar(
-    '<div class="neutral"><b>' + esc(d.nama) + '</b><br><br>' +
-    'Terima kasih kerana menyertai Ujian Pemilihan Tahun 1 SABK. Dukacita dimaklumkan bahawa calon <b>tidak tersenarai</b> ' +
-    'untuk tawaran kemasukan ke SK Agama (MIS) Miri bagi sesi 2027.</div>');
-  if (d.status !== 'layak') return papar('<div class="gagal">' + esc(d.mesej || 'Ralat tidak dijangka.') + '</div>');
+  if (d.status === 'tutup') return papar('neutral', IKON.info, 'Keputusan belum diumumkan', esc(d.mesej || 'Semakan akan dibuka tidak lama lagi. Sila semak semula kemudian.'), false);
+  if (d.status === 'ic_salah') return papar('amaran', IKON.silang, 'No. MyKid tidak sah', 'Pastikan nombor yang dimasukkan mengandungi 12 digit seperti pada MyKid anak.');
+  if (d.status === 'tiada') return papar('amaran', IKON.silang, 'Nombor ini tiada dalam senarai calon',
+    'Kami tidak menemui calon Ujian Pemilihan Tahun 1 2027 dengan No. MyKid <b>' + esc(fmtIC(icSemasa)) + '</b>. Semak semula nombor tersebut dan cuba lagi.');
+  if (d.status === 'tidak_layak') return papar('tidak', IKON.hati, esc(d.nama),
+    'Terima kasih kerana menyertai Ujian Pemilihan Tahun 1 SABK. Calon tidak tersenarai dalam tawaran kemasukan ke SK Agama (MIS) Miri bagi sesi 2027. Semoga anak tuan/puan terus cemerlang di sekolah pilihan.');
+  if (d.status !== 'layak') return papar('amaran', IKON.silang, 'Semakan tidak dapat diselesaikan', esc(d.mesej || 'Cuba sekali lagi sebentar nanti.'));
 
-  const dok = (d.dokumen || []).map(x =>
-    '<a class="dok" href="' + esc(x.url) + '" target="_blank" rel="noopener">' +
-    '<div class="i">📄</div><div><b>' + esc(x.nama) + '</b>' + (x.ket ? '<span>' + esc(x.ket) + '</span>' : '') + '</div></a>'
-  ).join('');
+  const dokTambahan = (d.dokumen || []).map(x =>
+    `<a class="dok" href="${esc(x.url)}" target="_blank" rel="noopener">` +
+    `<span class="ikon">${IKON.dok}</span><span class="t"><b>${esc(x.nama)}</b>${x.ket ? `<small>${esc(x.ket)}</small>` : ''}</span>` +
+    `<span class="anak">${IKON.luar}</span></a>`).join('');
 
   const surat = d.suratSedia
-    ? '<button class="dok utama" id="btnSurat" type="button"><div class="i">🏅</div><div><b>Surat Tawaran Kemasukan</b><span>PDF · ' + esc(d.noRujukan) + '</span></div></button>'
-    : '<div class="dok"><div class="i">⏳</div><div><b>Surat Tawaran Kemasukan</b><span>Sedang disediakan — sila semak semula kemudian.</span></div></div>';
+    ? `<button class="dok utama" id="btnSurat" type="button"><span class="ikon">${IKON.surat}</span>` +
+      `<span class="t"><b>Surat Tawaran Kemasukan</b><small>PDF · Ruj. ${esc(d.noRujukan)}</small></span><span class="anak">${IKON.turun}</span></button>`
+    : `<div class="dok menunggu"><span class="ikon">${IKON.surat}</span><span class="t"><b>Surat Tawaran Kemasukan</b>` +
+      `<small>Sedang disediakan. Sila semak semula kemudian.</small></span></div>`;
 
   hasil.innerHTML =
-    '<div class="kad tahniah"><div class="ikon">🎉</div><h2>TAHNIAH!</h2>' +
-    '<div>Anak tuan/puan <b>LAYAK</b> ditawarkan tempat ke Tahun 1 di SK Agama (MIS) Miri bagi sesi persekolahan 2027.</div>' +
-    '<dl><dt>Nama</dt><dd>' + esc(d.nama) + '</dd>' +
-    '<dt>Angka Giliran</dt><dd>' + esc(d.giliran) + '</dd>' +
-    '<dt>Tadika</dt><dd>' + esc(d.tadika || '-') + '</dd></dl>' +
-    (d.tarikhAkhir ? '<div class="amaran">Sila berikan pengesahan menerima atau menolak tawaran ini <b>sebelum ' + esc(d.tarikhAkhir) + '</b>.</div>' : '') +
-    '</div>' +
-    '<div class="kad"><h3>Dokumen untuk dimuat turun</h3>' + surat + dok + '</div>';
+    `<article class="slip masuk" aria-labelledby="tahniah">
+       <div class="slip-atas">
+         ${IKON.bintang}
+         <h2 id="tahniah" tabindex="-1">Tahniah!</h2>
+         <p>Anak tuan/puan ditawarkan tempat di Tahun 1, SK Agama (MIS) Miri bagi sesi persekolahan 2027.</p>
+       </div>
+       <div class="tebuk" aria-hidden="true"></div>
+       <div class="slip-badan">
+         <p class="nama">${esc(d.nama)}</p>
+         <dl class="butiran">
+           <div><dt>Angka giliran</dt><dd class="gil">${esc(d.giliran)}</dd></div>
+           <div><dt>No. MyKid</dt><dd class="ic">${esc(fmtIC(icSemasa))}</dd></div>
+           <div class="penuh"><dt>Tadika / prasekolah</dt><dd>${esc(d.tadika || '-')}</dd></div>
+         </dl>
+         ${d.tarikhAkhir ? `<div class="tarikh-akhir">${IKON.jam}<span>Sila beri pengesahan terima atau tolak tawaran <b>sebelum ${esc(d.tarikhAkhir)}</b>.</span></div>` : ''}
+       </div>
+     </article>
 
+     <section class="panel masuk">
+       <h3>Langkah seterusnya</h3>
+       <p class="sub">Lengkapkan mengikut turutan di bawah.</p>
+       <ol class="langkah">
+         <li><span class="langkah-tajuk">Muat turun surat tawaran</span>
+             <span class="langkah-teks">Simpan atau cetak surat ini sebagai rekod.</span>${surat}</li>
+         ${dokTambahan ? `<li><span class="langkah-tajuk">Muat turun dan isi borang</span>
+             <span class="langkah-teks">Tandakan sama ada menerima atau menolak tawaran, kemudian tandatangan.</span>${dokTambahan}</li>` : ''}
+         <li><span class="langkah-tajuk">Serahkan borang ke sekolah</span>
+             <span class="langkah-teks">Hantar borang yang lengkap ke pejabat SK Agama (MIS) Miri${d.tarikhAkhir ? ' sebelum ' + esc(d.tarikhAkhir) : ''}.</span></li>
+       </ol>
+       <button class="butang kedua lagi" type="button" data-semula style="margin-top:22px">Semak nombor lain</button>
+     </section>`;
+
+  ikatSemula();
   const b = $('#btnSurat');
   if (b) b.addEventListener('click', muatSurat);
+  $('#tahniah').focus({ preventScroll: true });
+  $('.slip').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
 }
+
+function fmtIC(d) { return d && d.length === 12 ? `${d.slice(0,6)}-${d.slice(6,8)}-${d.slice(8)}` : d; }
 
 async function muatSurat() {
   const b = $('#btnSurat');
-  const asal = b.innerHTML;
+  const kecil = b.querySelector('small');
+  const asal = kecil.textContent;
   b.disabled = true;
-  b.querySelector('span').textContent = 'Sedang memuat turun…';
+  kecil.textContent = 'Sedang memuat turun…';
   try {
     const d = await panggil({ action: 'surat', ic: icSemasa });
     if (d.status !== 'ok') throw new Error(d.status);
@@ -161,10 +386,10 @@ async function muatSurat() {
     a.href = url; a.download = d.namaFail || 'Surat_Tawaran_Tahun1_2027.pdf';
     document.body.appendChild(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 60000);
-    b.innerHTML = asal;
+    kecil.textContent = 'Dimuat turun. Semak folder Downloads.';
   } catch (err) {
-    b.innerHTML = asal;
-    alert('Gagal memuat turun surat. Sila cuba lagi sebentar.');
+    kecil.textContent = 'Muat turun gagal. Tekan sekali lagi untuk cuba semula.';
+    setTimeout(() => { kecil.textContent = asal; }, 5000);
   } finally {
     b.disabled = false;
   }
