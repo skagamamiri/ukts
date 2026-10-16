@@ -101,6 +101,7 @@
   }
   .bintang{width:54px;height:54px;margin:0 auto 10px;display:block}
   .slip-atas h2{margin:0;font-size:1.9rem;font-weight:700;letter-spacing:-.01em}
+  .contoh{display:inline-block;margin-bottom:10px;padding:4px 12px;border-radius:999px;background:#fff;color:var(--hijau);font-size:.8rem;font-weight:600}
   .slip-atas p{margin:6px auto 0;max-width:32ch;font-weight:300;opacity:.92}
   .tebuk{ /* garis tebuk tiket */
     position:relative;height:0;border-top:2px dashed var(--garis);margin:0 18px;
@@ -230,6 +231,19 @@ const ralat = $('#ralat-ic');
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let icSemasa = '';
 
+// ---- Data contoh untuk menguji paparan "layak" (padam selepas ujian) ----
+const IC_CONTOH = '999999999999';
+const DATA_CONTOH = {
+  status: 'layak', contoh: true,
+  nama: 'NUR AISYAH HUMAIRA BINTI AHMAD FAIZAL',
+  giliran: 'UPKTS27M/999',
+  tadika: 'TADIKA CONTOH MIRI',
+  noRujukan: 'PPDM.600-2/1/3 Jld.2 (23)',
+  suratSedia: true,
+  tarikhAkhir: '23 Oktober 2026 (Jumaat)',
+  dokumen: [{ nama: 'Borang Setuju Terima / Menolak Tawaran', url: 'borang-pengesahan-2027.pdf', ket: 'PDF, 1 muka surat' }]
+};
+
 const IKON = {
   dok: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>',
   surat: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg>',
@@ -278,6 +292,7 @@ $('#borang').addEventListener('submit', async e => {
     return;
   }
   icSemasa = ic;
+  if (ic === IC_CONTOH) { tunjuk(DATA_CONTOH); return; }
   sibuk(true);
   hasil.innerHTML = '<section class="panel masuk"><div class="muat"><span class="pusing" aria-hidden="true"></span>Menyemak rekod calon…</div></section>';
   try {
@@ -330,6 +345,7 @@ function tunjuk(d) {
   hasil.innerHTML =
     `<article class="slip masuk" aria-labelledby="tahniah">
        <div class="slip-atas">
+         ${d.contoh ? '<span class="contoh">Paparan contoh</span>' : ''}
          ${IKON.bintang}
          <h2 id="tahniah" tabindex="-1">Tahniah!</h2>
          <p>Anak tuan/puan ditawarkan tempat di Tahun 1, SK Agama (MIS) Miri bagi sesi persekolahan 2027.</p>
@@ -374,6 +390,7 @@ async function muatSurat() {
   const kecil = b.querySelector('small');
   const asal = kecil.textContent;
   b.disabled = true;
+  if (icSemasa === IC_CONTOH) { kecil.textContent = 'Ini paparan contoh. Surat sebenar dijana oleh sistem.'; b.disabled = false; return; }
   kecil.textContent = 'Sedang memuat turun…';
   try {
     const d = await panggil({ action: 'surat', ic: icSemasa });
