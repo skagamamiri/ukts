@@ -194,7 +194,7 @@
   <img class="logo" src="logo.png" width="88" height="101" alt="Lencana Sekolah Kebangsaan Agama (MIS) Miri">
   <div class="sekolah">Sekolah Kebangsaan Agama (MIS) Miri</div>
   <h1>Semakan Kemasukan<br>Tahun 1 2027</h1>
-  <p>Keputusan Ujian Pemilihan Tahun Satu SABK Negeri Sarawak</p>
+  <p>Keputusan Ujian Kemasukan Tahun Satu SABK Negeri Sarawak</p>
 </header>
 
 <main>
@@ -331,9 +331,9 @@ function tunjuk(d) {
   if (d.status === 'tutup') return papar('neutral', IKON.info, 'Keputusan belum diumumkan', esc(d.mesej || 'Semakan akan dibuka tidak lama lagi. Sila semak semula kemudian.'), false);
   if (d.status === 'ic_salah') return papar('amaran', IKON.silang, 'No. MyKid tidak sah', 'Pastikan nombor yang dimasukkan mengandungi 12 digit seperti pada MyKid anak.');
   if (d.status === 'tiada') return papar('amaran', IKON.silang, 'Nombor ini tiada dalam senarai calon',
-    'Kami tidak menemui calon Ujian Pemilihan Tahun 1 2027 dengan No. MyKid <b>' + esc(fmtIC(icSemasa)) + '</b>. Semak semula nombor tersebut dan cuba lagi.');
+    'Kami tidak menemui calon Ujian Kemasukan Tahun 1 2027 dengan No. MyKid <b>' + esc(fmtIC(icSemasa)) + '</b>. Semak semula nombor tersebut dan cuba lagi.');
   if (d.status === 'tidak_layak') return papar('tidak', IKON.hati, (d.contoh ? '<span class="contoh contoh-kecil">Paparan contoh</span><br>' : '') + esc(d.nama),
-    'Terima kasih kerana menyertai Ujian Pemilihan Tahun 1 SABK. Calon tidak tersenarai dalam tawaran kemasukan ke SK Agama (MIS) Miri bagi sesi 2027. Semoga anak tuan/puan terus cemerlang di sekolah pilihan.');
+    'Terima kasih kerana menyertai Ujian Kemasukan Tahun 1 SABK. Calon tidak tersenarai dalam tawaran kemasukan ke SK Agama (MIS) Miri bagi sesi 2027. Semoga anak tuan/puan terus cemerlang di sekolah pilihan.');
   if (d.status !== 'layak') return papar('amaran', IKON.silang, 'Semakan tidak dapat diselesaikan', esc(d.mesej || 'Cuba sekali lagi sebentar nanti.'));
 
   const dokTambahan = (d.dokumen || []).map(x =>
