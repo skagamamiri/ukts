@@ -89,6 +89,8 @@
 
   .ralat{color:var(--merah);font-size:.9rem;margin:8px 0 0}
   .ralat:empty{display:none}
+  .tukar-mod{display:block;margin:10px auto 0;padding:4px 6px;font:inherit;font-size:.86rem;color:var(--hijau-2);background:none;border:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+  .tukar-mod:hover{color:var(--hijau)}
 
   /* ---------- Slip tawaran (elemen utama) ---------- */
   .slip{
@@ -205,6 +207,7 @@
       <input id="ic" class="medan" inputmode="numeric" autocomplete="off"
              placeholder="200412-13-0554" maxlength="14" aria-describedby="bantu-ic ralat-ic" required>
       <p class="ralat" id="ralat-ic" role="alert"></p>
+      <button type="button" class="tukar-mod" id="tukarMod" aria-controls="ic">Calon bukan warganegara? Guna No. Pasport</button>
       <button id="btn" class="butang" type="submit">Semak keputusan</button>
     </form>
   </section>
@@ -260,10 +263,38 @@ const IKON = {
   bintang: '<svg class="bintang" viewBox="0 0 60 60" aria-hidden="true"><g fill="#c99a2e"><rect x="14" y="14" width="32" height="32" rx="3"/><rect x="14" y="14" width="32" height="32" rx="3" transform="rotate(45 30 30)"/></g><path d="m21 30 6 6 12-13" fill="none" stroke="#0d4a40" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 };
 
-// Format paparan 200412-13-0554 (yang dihantar tetap 12 digit)
+// Mod MyKid (12 digit, papar 200412-13-0554) atau mod pasport (huruf + nombor) untuk bukan warganegara
+let modPasport = false;
+const normal = v => String(v).toUpperCase().replace(/[^0-9A-Z]/g, '');
+
+function tetapMod(pasport) {
+  modPasport = pasport;
+  medan.value = '';
+  medan.removeAttribute('aria-invalid'); ralat.textContent = '';
+  if (pasport) {
+    $('#lbl-ic').textContent = 'No. Pasport / dokumen calon';
+    $('#bantu-ic').textContent = 'Untuk calon bukan warganegara. Masukkan nombor seperti yang didaftarkan semasa ujian.';
+    medan.setAttribute('inputmode', 'text'); medan.setAttribute('autocapitalize', 'characters');
+    medan.placeholder = 'cth: A12345678'; medan.maxLength = 20;
+    $('#tukarMod').textContent = 'Kembali guna No. MyKid';
+  } else {
+    $('#lbl-ic').textContent = 'No. MyKid calon';
+    $('#bantu-ic').textContent = 'Nombor 12 digit pada MyKid atau sijil kelahiran anak.';
+    medan.setAttribute('inputmode', 'numeric'); medan.removeAttribute('autocapitalize');
+    medan.placeholder = '200412-13-0554'; medan.maxLength = 14;
+    $('#tukarMod').textContent = 'Calon bukan warganegara? Guna No. Pasport';
+  }
+  medan.focus();
+}
+$('#tukarMod').addEventListener('click', () => tetapMod(!modPasport));
+
 medan.addEventListener('input', () => {
-  const d = medan.value.replace(/\D/g, '').slice(0, 12);
-  medan.value = d.length > 8 ? `${d.slice(0,6)}-${d.slice(6,8)}-${d.slice(8)}` : d.length > 6 ? `${d.slice(0,6)}-${d.slice(6)}` : d;
+  if (modPasport) {
+    medan.value = normal(medan.value).slice(0, 15);
+  } else {
+    const d = medan.value.replace(/\D/g, '').slice(0, 12);
+    medan.value = d.length > 8 ? `${d.slice(0,6)}-${d.slice(6,8)}-${d.slice(8)}` : d.length > 6 ? `${d.slice(0,6)}-${d.slice(6)}` : d;
+  }
   if (medan.getAttribute('aria-invalid')) { medan.removeAttribute('aria-invalid'); ralat.textContent = ''; }
 });
 
@@ -288,10 +319,13 @@ function sibuk(ya) {
 
 $('#borang').addEventListener('submit', async e => {
   e.preventDefault();
-  const ic = medan.value.replace(/\D/g, '');
-  if (ic.length !== 12) {
+  const ic = normal(medan.value);
+  const salah = modPasport
+    ? (!/^(?=.*[A-Z])[A-Z0-9]{6,15}$/.test(ic) && !/^\d{12}$/.test(ic) ? 'No. pasport / dokumen tidak lengkap. Semak semula nombor yang dimasukkan.' : '')
+    : (ic.length !== 12 ? 'No. MyKid mesti 12 digit. Anda telah masukkan ' + ic.length + ' digit.' : '');
+  if (salah) {
     medan.setAttribute('aria-invalid', 'true');
-    ralat.textContent = 'No. MyKid mesti 12 digit. Anda telah masukkan ' + ic.length + ' digit.';
+    ralat.textContent = salah;
     medan.focus();
     return;
   }
@@ -331,7 +365,7 @@ function tunjuk(d) {
   if (d.status === 'tutup') return papar('neutral', IKON.info, 'Keputusan belum diumumkan', esc(d.mesej || 'Semakan akan dibuka tidak lama lagi. Sila semak semula kemudian.'), false);
   if (d.status === 'ic_salah') return papar('amaran', IKON.silang, 'No. MyKid tidak sah', 'Pastikan nombor yang dimasukkan mengandungi 12 digit seperti pada MyKid anak.');
   if (d.status === 'tiada') return papar('amaran', IKON.silang, 'Nombor ini tiada dalam senarai calon',
-    'Kami tidak menemui calon Ujian Kemasukan Tahun 1 2027 dengan No. MyKid <b>' + esc(fmtIC(icSemasa)) + '</b>. Semak semula nombor tersebut dan cuba lagi.');
+    'Kami tidak menemui calon Ujian Kemasukan Tahun 1 2027 dengan nombor <b>' + esc(fmtIC(icSemasa)) + '</b>. Semak semula nombor tersebut dan cuba lagi.');
   if (d.status === 'tidak_layak') return papar('tidak', IKON.hati, (d.contoh ? '<span class="contoh contoh-kecil">Paparan contoh</span><br>' : '') + esc(d.nama),
     'Terima kasih kerana menyertai Ujian Kemasukan Tahun 1 SABK. Calon tidak tersenarai dalam tawaran kemasukan ke SK Agama (MIS) Miri bagi sesi 2027. Semoga anak tuan/puan terus cemerlang di sekolah pilihan.');
   if (d.status !== 'layak') return papar('amaran', IKON.silang, 'Semakan tidak dapat diselesaikan', esc(d.mesej || 'Cuba sekali lagi sebentar nanti.'));
@@ -360,7 +394,7 @@ function tunjuk(d) {
          <p class="nama">${esc(d.nama)}</p>
          <dl class="butiran">
            <div><dt>Angka giliran</dt><dd class="gil">${esc(d.giliran)}</dd></div>
-           <div><dt>No. MyKid</dt><dd class="ic">${esc(fmtIC(icSemasa))}</dd></div>
+           <div><dt>${/^\d{12}$/.test(icSemasa) ? 'No. MyKid' : 'No. Pasport'}</dt><dd class="ic">${esc(fmtIC(icSemasa))}</dd></div>
            <div class="penuh"><dt>Tadika / prasekolah</dt><dd>${esc(d.tadika || '-')}</dd></div>
          </dl>
          ${d.tarikhAkhir ? `<div class="tarikh-akhir">${IKON.jam}<span>Sila beri pengesahan terima atau tolak tawaran <b>sebelum ${esc(d.tarikhAkhir)}</b>.</span></div>` : ''}
